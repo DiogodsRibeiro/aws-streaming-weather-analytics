@@ -1,0 +1,11 @@
+aws iam create-role \
+    --role-name glue-etl-role \
+    --assume-role-policy-document file://policies/glue-trust-policy.json
+
+aws iam attach-role-policy \
+    --role-name glue-etl-role \
+    --policy-arn arn:aws:iam::aws:policy/service-role/AWSGlueServiceRole
+
+aws iam attach-role-policy \
+    --role-name glue-etl-role \
+    --policy-arn arn:aws:iam::aws:policy/AmazonS3FullAccess

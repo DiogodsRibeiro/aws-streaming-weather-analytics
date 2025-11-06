@@ -1,0 +1,13 @@
+aws iam create-role \
+    --role-name lambda-consumer-batch-role \
+    --assume-role-policy-document file://policies/lambda-trust-policy.json
+
+aws iam attach-role-policy \
+    --role-name lambda-consumer-batch-role \
+    --policy-arn arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
+
+# Adicionar permissões S3 e Kinesis
+aws iam put-role-policy \
+    --role-name lambda-consumer-batch-role \
+    --policy-name s3-kinesis-access \
+    --policy-document file://policies/s3-kinesis-policy.json

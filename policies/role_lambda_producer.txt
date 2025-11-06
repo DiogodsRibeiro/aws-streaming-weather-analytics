@@ -1,0 +1,13 @@
+aws iam create-role \
+    --role-name lambda-producer-role \
+    --assume-role-policy-document file://policies/lambda-trust-policy.json
+
+aws iam attach-role-policy \
+    --role-name lambda-producer-role \
+    --policy-arn arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
+
+# Criar política inline para Kinesis
+aws iam put-role-policy \
+    --role-name lambda-producer-role \
+    --policy-name kinesis-put-record \
+    --policy-document file://policies/kinesis-put-policy.json
